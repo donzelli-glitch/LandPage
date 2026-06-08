@@ -32,6 +32,8 @@ import {
   Sparkle
 } from "lucide-react";
 import LaudosPortal from "./components/LaudosPortal";
+import creatinaTub from "./assets/images/creatina_tub_1780796520936.png";
+import eduardoDonzelli from "./assets/images/eduardo_donzelli_1780796534839-1.png";
 
 // Interactive Dose Calculator Component to add elite visual engagement
 function DoseCalculator() {
@@ -433,7 +435,7 @@ export default function App() {
                 {/* Rounded dark technical platform card */}
                 <div className="relative bg-gradient-to-tr from-[#16161a] to-[#22222a] p-6 sm:p-8 rounded-3xl border border-white/15 hover:border-orenda-red/30 shadow-[0_0_50px_rgba(255,71,78,0.15)] transition-all duration-500 overflow-hidden self-center w-full">
                   <img 
-                    src="/src/assets/images/creatina_tub_1780796520936.png" 
+                    src={creatinaTub} 
                     alt="Pote de Creatina Orenda Performance de Altíssima Qualidade" 
                     className="w-full h-auto object-cover rounded-2xl relative z-10 transition-transform duration-700 group-hover:scale-105"
                     referrerPolicy="no-referrer"
@@ -564,7 +566,7 @@ export default function App() {
                 
                 <div className="relative bg-[#16161a] rounded-3xl overflow-hidden border border-white/10 shadow-2xl w-full">
                   <img 
-                    src="/src/assets/images/eduardo_donzelli_1780796534839-1.png" 
+                    src={eduardoDonzelli} 
                     alt="Eduardo Donzelli - Fundador e Especialista Químico Orenda Performance" 
                     className="w-full h-auto object-cover rounded-2xl relative z-10 grayscale group-hover:grayscale-0 transition-all duration-700"
                     referrerPolicy="no-referrer"

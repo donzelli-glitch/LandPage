@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import eduardoDonzelli from "../assets/images/eduardo_donzelli_1780796534839-1.png";
 import { 
   Shield, 
   Check, 
@@ -412,7 +413,7 @@ export default function LaudosPortal() {
                     <div className="flex items-center gap-3">
                       <div className="bg-[#1c1c22] border border-white/10 w-12 h-12 rounded-full overflow-hidden flex items-center justify-center shrink-0">
                         <img 
-                          src="/src/assets/images/eduardo_donzelli_1780796534839-1.png" 
+                          src={eduardoDonzelli} 
                           alt="Eduardo Donzelli" 
                           className="w-full h-full object-cover scale-105"
                           referrerPolicy="no-referrer"

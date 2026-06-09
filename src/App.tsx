@@ -29,7 +29,9 @@ import {
   ChevronDown,
   Scale,
   Zap,
-  Sparkle
+  Sparkle,
+  Instagram,
+  ExternalLink
 } from "lucide-react";
 import LaudosPortal from "./components/LaudosPortal";
 import creatinaTub from "./assets/images/creatina_tub_1780796520936.png";
@@ -133,8 +135,24 @@ function DoseCalculator() {
         </div>
       </div>
 
+      {/* Chemical Assimilation Breakdown Guide */}
+      <div className="mt-6 pt-5 border-t border-white/5 space-y-3.5 text-left">
+        <h5 className="text-[11px] font-mono font-bold text-white uppercase tracking-wider">Como funciona a assimilação celular?</h5>
+        <div className="space-y-2">
+          <p className="text-[11px] text-orenda-gray-medium leading-relaxed">
+            1. <strong className="text-white/90">Fórmula de Saturação (0.3g/kg):</strong> Ingerir esta quantidade diária por 5 a 7 dias divide-se em 4 tomadas de 5g, maximizando a fosfocreatina muscular até 4 vezes mais rapidamente.
+          </p>
+          <p className="text-[11px] text-orenda-gray-medium leading-relaxed">
+            2. <strong className="text-white/90">Manutenção Contínua (0.07g/kg):</strong> Garante a ressíntese contínua de ATP no treino, mantendo as reservas intracelulares totalmente carregadas.
+          </p>
+          <p className="text-[11px] text-orenda-gray-medium leading-relaxed">
+            3. <strong className="text-white/90">Coeficiente Osmótico de Hidratação (35ml/kg):</strong> A reposição celular atrai moléculas de água de forma intramuscular (hipertrofia celular real), de onde provém a importância crítica de manter-se sob forte hidratação de L/dia.
+          </p>
+        </div>
+      </div>
+
       <div className="mt-4 text-[10px] text-orenda-gray-medium/60 italic text-center">
-        *Orientações baseadas em dados médios de metabolização. Consulte seu nutricionista.
+        *Orientações baseadas em dados médios de metabolização. Consulte seu profissional de saúde.
       </div>
     </div>
   );
@@ -186,7 +204,7 @@ export default function App() {
         "Ideal para treinos focados em explosão",
         "Rendimento máximo por pote",
         "Suporte técnico incluso pelo WhatsApp",
-        "Supervisão direta Eng. Químico"
+        "Supervisão direta do Engenheiro Químico"
       ],
       whatsappLink: "https://wa.me/5516997457085?text=Ol%C3%A1%2C%20quero%20comprar%20a%20Creatina%20Orenda%20Performance%20300g.%20Pode%20me%20passar%20o%20valor%20e%20forma%20de%20pagamento%3F",
       buttonText: "Comprar 300g",
@@ -235,8 +253,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-orenda-dark text-orenda-gray-light font-sans relative antialiased overflow-x-hidden selection:bg-orenda-red selection:text-white">
-      {/* 1. Header Fixo */}
-      <header className="sticky top-0 z-50 bg-orenda-dark/80 backdrop-blur-md border-b border-white/5 py-4 transition-all">
+      {/* 1. Header Fixo — Foco Total em Conversão, Zero Distrações */}
+      <header className="sticky top-0 z-50 bg-orenda-dark/95 backdrop-blur-md border-b border-white/5 py-4 transition-all" id="landing-header">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2" id="header-logo-container">
             {/* Minimalist Tech Vector Logo */}
@@ -247,99 +265,37 @@ export default function App() {
               <span className="font-display font-extrabold tracking-tight text-white leading-none text-base sm:text-lg">
                 ORENDA <span className="text-orenda-red">PERFORMANCE</span>
               </span>
-              <span className="text-[9px] font-mono tracking-widest text-orenda-gray-medium leading-none mt-0.5">
-                CIÊNCIA • FORÇA • PERFORMANCE
+              <span className="text-[9px] font-mono tracking-widest text-orenda-red leading-none mt-0.5 font-bold">
+                100% PURA • SUPERVISÃO QUÍMICA
               </span>
             </div>
           </a>
 
-          {/* Large Screen Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-            {menuItems.map((item, index) => (
-              <a 
-                key={index} 
-                href={item.id} 
-                className="text-orenda-gray-medium hover:text-white transition-colors duration-200 py-1"
-                id={`nav-link-${index}`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Header Action Button */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Direct CTA Buttons representing Social Proof and Purchase channels */}
+          <div className="flex items-center gap-2 sm:gap-4" id="header-ctas">
             <a 
-              href="https://wa.me/5516997457085?text=Olá,%20quero%20comprar%20a%20Creatina%20Orenda%20Performance.%20Pode%20me%20enviar%20valores%20e%20opções%20de%20150g%20e%20300g?"
+              href="https://www.instagram.com/orendabiotech"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-orenda-red hover:bg-orenda-red-hover text-white px-5 py-2.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-orenda-red/20 border border-transparent active:scale-95"
+              className="flex items-center gap-1.5 bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-orenda-red/30 px-3 py-2 rounded-xl text-xs font-mono font-semibold transition-all"
+              id="header-instagram-link"
+            >
+              <Instagram className="w-3.5 h-3.5 text-orenda-red font-bold" />
+              <span className="hidden sm:inline">Siga no Instagram</span> <span className="text-[#ff474e] font-bold">@orendabiotech</span>
+            </a>
+
+            <a 
+              href="https://wa.me/5516997457085?text=Olá,%20gostaria%20de%20garantir%20um%20lote%20especial%20da%20Creatina%20Orenda%20Performance!"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-orenda-red hover:bg-orenda-red-hover text-white px-4 py-2 sm:py-2.5 rounded-xl text-xs font-mono font-black uppercase tracking-wider transition-all duration-300 hover:shadow-lg hover:shadow-orenda-red/20 border border-transparent active:scale-95 flex items-center gap-1"
               id="header-cta-btn"
             >
-              Comprar agora
+              <Flame className="w-3.5 h-3.5 fill-white hidden xs:inline" />
+              <span>Comprar Agora</span>
             </a>
           </div>
-
-          {/* Burger menu icon for mobile */}
-          <button 
-            type="button"
-            className="md:hidden text-white hover:text-orenda-red p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Abrir menu"
-            id="mobile-menu-toggle"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
         </div>
-
-        {/* Mobile Navigation Drawer */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-orenda-graphite border-b border-white/10"
-              id="mobile-drawer"
-            >
-              <div className="px-4 pt-2 pb-6 space-y-3">
-                {menuItems.map((item, index) => (
-                  <a 
-                    key={index} 
-                    href={item.id} 
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block text-base tracking-wide text-orenda-gray-light hover:text-orenda-red font-medium py-2 border-b border-white/5"
-                    id={`mobile-nav-link-${index}`}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-                <div className="pt-4 flex flex-col gap-3">
-                  <a 
-                    href="https://wa.me/5516997457085?text=Olá,%20quero%20comprar%20a%20Creatina%20Orenda%20Performance.%20Pode%20me%20enviar%20valores%20e%20opções%20de%20150g%20e%20300g?"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full text-center bg-orenda-red text-white py-3 rounded-xl font-mono font-bold tracking-wider uppercase text-sm"
-                    onClick={() => setMobileMenuOpen(false)}
-                    id="mobile-drawer-whatsapp-btn"
-                  >
-                    Quero minha creatina
-                  </a>
-                  <a 
-                    href="https://www.orendaperformance.com.br"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full text-center bg-white/5 text-orenda-gray-light py-3 rounded-xl font-mono font-medium text-xs tracking-wider"
-                    onClick={() => setMobileMenuOpen(false)}
-                    id="mobile-drawer-site-btn"
-                  >
-                    Ver Linha de Suplementos
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </header>
 
       {/* 2. Hero Section */}
@@ -380,29 +336,43 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Dual Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+              {/* Dual Action & Social Trust Buttons */}
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 pt-2" id="hero-actions-container">
                 <a 
-                  href="https://wa.me/5516997457085?text=Olá,%20quero%20comprar%20a%20Creatina%20Orenda%20Performance.%20Pode%20me%20enviar%20valores%20e%20opções%20de%20150g%20e%20300g?"
+                  href="https://wa.me/5516997457085?text=Olá,%20quero%20comprar%20a%20Creatina%20Orenda%20Performance.%20Quero%20aproveitar%20o%20lote%20especial%20com%20laudo%20de%2520pureza!"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-orenda-red hover:bg-orenda-red-hover text-white font-mono font-extrabold uppercase text-xs sm:text-sm tracking-widest px-8 py-4 sm:py-5 rounded-xl transition-all duration-300 hover:shadow-2xl hover:shadow-orenda-red/30 flex items-center justify-center gap-2 relative overflow-hidden group active:scale-98"
+                  className="bg-orenda-red hover:bg-orenda-red-hover text-white font-mono font-extrabold uppercase text-xs sm:text-sm tracking-widest px-8 py-4 sm:py-5 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:shadow-orenda-red/40 flex items-center justify-center gap-2 relative overflow-hidden group active:scale-98 shrink-0 min-w-[280px]"
                   id="hero-buy-btn"
                 >
-                  <Flame className="w-4 h-4 text-white fill-white group-hover:animate-pulse" />
-                  <span>COMPRAR VIA WHATSAPP (GARANTIR LOTE)</span>
+                  <Flame className="w-5 h-5 text-white fill-white group-hover:animate-bounce" />
+                  <span>COMPRAR AGORA (GARANTIR LOTE)</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                <a 
-                  href="https://www.orendaperformance.com.br"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 font-mono font-bold text-xs sm:text-sm tracking-widest px-6 py-4 sm:py-5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 active:scale-98"
-                  id="hero-visit-btn"
-                >
-                  <span>CONHECER TODA A LINHA</span>
-                </a>
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                  <a 
+                    href="https://www.orendaperformance.com.br"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 sm:flex-none bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 font-mono font-bold text-xs tracking-widest px-5 py-4 sm:py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 active:scale-98"
+                    id="hero-visit-btn"
+                  >
+                    <span>VISITAR SITE</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-orenda-gray-medium" />
+                  </a>
+
+                  <a 
+                    href="https://www.instagram.com/orendabiotech"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 sm:flex-none bg-gradient-to-r from-purple-900/40 to-pink-900/40 hover:from-purple-800/50 hover:to-pink-800/50 text-white border border-white/10 hover:border-[#ff474e]/40 font-mono font-bold text-xs tracking-widest px-5 py-4 sm:py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 active:scale-98"
+                    id="hero-instagram-btn"
+                  >
+                    <Instagram className="w-4 h-4 text-pink-500" />
+                    <span>@ORENDABIOTECH</span>
+                  </a>
+                </div>
               </div>
 
               {/* Key Brand Signals below CTA Buttons */}
@@ -486,6 +456,76 @@ export default function App() {
             <p className="text-base sm:text-lg text-orenda-gray-medium leading-relaxed" id="section-dor-text">
               Qualquer marca consegue criar um rótulo chamativo no Instagram. No entanto, por trás de preços baixos demais, escondem-se misturas indesejadas (como amido e maltodextrina), ausência de controle sanitário e laudos laboratoriais duvidosos. Ingerir suplementação é lidar diretamente com a sua biologia celular. Nós transformamos o invisível em decisão segura.
             </p>
+          </div>
+
+          {/* Side-by-side Comparison Matrix (Pain vs Solution) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 pt-2" id="comparison-matrix">
+            {/* Common Market Pain points */}
+            <div className="bg-black/30 border border-white/5 rounded-2xl p-6 sm:p-8 space-y-6 text-left relative overflow-hidden" id="common-market-pain">
+              <div className="absolute top-0 right-0 py-1.5 px-4 bg-white/5 border-b border-l border-white/10 rounded-bl-xl font-mono text-[9px] uppercase text-white/45 tracking-widest font-semibold">Mercado Comum</div>
+              <h3 className="font-display text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-pulse"></span>
+                O Perigo Oculto do Baixo Custo
+              </h3>
+              <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-light">
+                Marcas genéricas focam apenas em disputar centavos sacrificando a pureza. Insumos industriais sem refino adequado, procedência asiática desconhecida e fracionamento em locais sem supervisão profissional.
+              </p>
+              
+              <div className="space-y-4 pt-2">
+                <div className="flex items-start gap-2.5">
+                  <X className="w-4 h-4 text-orenda-red shrink-0 mt-0.5" />
+                  <p className="text-xs text-white/50"><strong className="text-white/80">Adulteradores Ocultos:</strong> Misturas com Maltodextrina ou amido para render o pote, causando picos glicêmicos indesejados e distensão abdominal.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <X className="w-4 h-4 text-orenda-red shrink-0 mt-0.5" />
+                  <p className="text-xs text-white/50"><strong className="text-white/80">Ausência de Laudos:</strong> Marcas que se escondem de fiscalização, ou que mostram laudos de laboratório duplicados de anos atrás.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <X className="w-4 h-4 text-orenda-red shrink-0 mt-0.5" />
+                  <p className="text-xs text-white/50"><strong className="text-white/80">Metais Pesados e Impurezas:</strong> Processos industriais rudimentares sem validação molecular, expondo os consumidores a substâncias nocivas.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <X className="w-4 h-4 text-orenda-red shrink-0 mt-0.5" />
+                  <p className="text-xs text-white/50"><strong className="text-white/80">Falta de Rosto Técnico:</strong> Donos de marca que de fato apenas terceirizam o produto e de modo algum entendem de bioquímica ou refino industrial.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Orenda Standard Solution */}
+            <div className="bg-gradient-to-br from-[#1c1214] to-[#121215] border border-orenda-red/30 rounded-2xl p-6 sm:p-8 space-y-6 text-left relative overflow-hidden shadow-2xl" id="orenda-standard-solution">
+              <div className="absolute top-0 right-0 py-1.5 px-4 bg-orenda-red/20 border-b border-l border-orenda-red/30 rounded-bl-xl font-mono text-[9px] uppercase text-[#ff474e] tracking-widest font-extrabold">Padrão Orenda</div>
+              <h3 className="font-display text-xl sm:text-2xl font-extrabold text-white flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-orenda-red animate-ping"></span>
+                A Certeza do Controle Químico
+              </h3>
+              <p className="text-xs sm:text-sm text-[#ff474e] leading-relaxed font-bold">
+                Assinado sob supervisão direta de Eduardo Donzelli (Engenheiro Químico e Mestre em Ciências Exatas). Cada lote é periciado sob rigorosos critérios científicos.
+              </p>
+              
+              <div className="space-y-4 pt-2">
+                <div className="flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-[#ff474e] shrink-0 mt-0.5" />
+                  <p className="text-xs text-white/80"><strong className="text-white">100% Pura e Monohidratada:</strong> Sem diluentes, sem adição oculta de carboidratos. Pureza química real e biodisponibilidade muscular máxima.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-[#ff474e] shrink-0 mt-0.5" />
+                  <p className="text-xs text-white/80"><strong className="text-white">Rastreamento Vital por Laudos:</strong> Portal de laudos atualizado frequentemente. O código no seu pote é a porta para o laudo preciso do lote.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-[#ff474e] shrink-0 mt-0.5" />
+                  <p className="text-xs text-white/80"><strong className="text-white">Filtro Bioquímico Rigoroso:</strong> Prevenção ativa de subprodutos indesejados (como dicianodiamida), assegurando sua saúde renal de longo prazo.</p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-[#ff474e] shrink-0 mt-0.5" />
+                  <p className="text-xs text-white/80"><strong className="text-white">Garantia Científica:</strong> Uma marca nascida da engenharia, formulada por cientistas exatos, para quem leva o corpo e os resultados a sério.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mb-10 max-w-2xl mx-auto" id="dor-middle-banner">
+            <p className="text-xs font-mono text-orenda-red uppercase font-bold tracking-wider">Como Fazemos a Diferença:</p>
+            <p className="text-sm text-orenda-gray-light mt-1">Conheça os 4 pilares inegociáveis que estabelecem o Padrão Orenda Performance:</p>
           </div>
 
           {/* Cards Grid */}
@@ -615,7 +655,7 @@ export default function App() {
                   <Award className="w-5 h-5 text-orenda-red shrink-0" id="cred-award-1" />
                   <div>
                     <span className="text-[10px] text-orenda-gray-medium font-mono uppercase block">Formação</span>
-                    <span className="text-xs font-bold text-white leading-tight">Eng. Químico</span>
+                    <span className="text-xs font-bold text-white leading-tight">Engenheiro Químico</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -633,6 +673,31 @@ export default function App() {
                     <span className="text-xs font-bold text-white leading-tight">100% Supervisionados</span>
                   </div>
                 </div>
+              </div>
+
+              {/* Direct Social connection CTA */}
+              <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center gap-4" id="founder-social-ctas">
+                <a 
+                  href="https://www.instagram.com/orendabiotech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-orenda-red/30 px-6 py-4 rounded-xl text-xs font-mono font-bold tracking-wider uppercase text-center flex items-center justify-center gap-2 transition-all duration-300"
+                  id="founder-instagram-btn"
+                >
+                  <Instagram className="w-4 h-4 text-[#ff474e]" />
+                  <span>Siga @orendabiotech no Instagram</span>
+                </a>
+                
+                <a 
+                  href="https://wa.me/5516997457085?text=Olá,%20tenho%20interesse%20na%20Creatina%20Orenda%20Performance%20supervisionada%20por%20você!"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-orenda-red hover:bg-orenda-red-hover text-white px-6 py-4 rounded-xl text-xs font-mono font-extrabold tracking-wider uppercase text-center flex items-center justify-center gap-1.5 transition-all duration-300"
+                  id="founder-buy-btn"
+                >
+                  <Flame className="w-4 h-4 text-white fill-white" />
+                  <span>Garantir Lote de Pureza</span>
+                </a>
               </div>
 
             </div>
@@ -1066,19 +1131,35 @@ export default function App() {
             ))}
           </div>
 
-          {/* Generic Link directly to entire site */}
-          <div className="mt-16 text-center" id="direct-store-link-box">
-            <p className="text-xs text-orenda-gray-medium mb-3">Deseja conhecer os outros produtos de nossa linha completa?</p>
-            <a 
-              href="https://www.orendaperformance.com.br"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-sm text-white font-bold hover:text-orenda-red transition-colors group border-b border-white/15 pb-0.5"
-              id="direct-store-link"
-            >
-              <span>Acessar o Site Orenda Performance</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+          {/* Multi-channel Navigation & Social Hub */}
+          <div className="mt-16 text-center space-y-6" id="direct-store-link-box">
+            <p className="text-xs sm:text-sm text-orenda-gray-medium max-w-md mx-auto">
+              Garanta sua Creatina Pura Orenda hoje, ou conecte-se aos nossos canais oficiais para acompanhar novidades Científicas e novos Lotes.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto">
+              <a 
+                href="https://www.orendaperformance.com.br"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 font-mono font-bold text-xs tracking-wider px-6 py-4 rounded-xl transition-all duration-300"
+                id="direct-store-web-btn"
+              >
+                <span>Acessar Loja Oficial</span>
+                <ExternalLink className="w-4 h-4 text-orenda-gray-medium" />
+              </a>
+
+              <a 
+                href="https://www.instagram.com/orendabiotech"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-900/20 to-pink-900/20 hover:from-purple-900/30 hover:to-pink-900/30 text-white border border-white/10 hover:border-[#ff474e]/30 font-mono font-bold text-xs tracking-wider px-6 py-4 rounded-xl transition-all duration-300"
+                id="direct-store-insta-btn"
+              >
+                <Instagram className="w-4 h-4 text-pink-500" />
+                <span>Seguir no Instagram</span>
+              </a>
+            </div>
           </div>
 
         </div>

@@ -84,6 +84,22 @@ export default function LaudosPortal() {
   const [toastMessage, setToastMessage] = useState<string>("");
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
+  // Admin authentication state
+  const [adminPassword, setAdminPassword] = useState<string>("");
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [authError, setAuthError] = useState<string>("");
+
+  const handleAuthSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Premium restricted password check: orenda2026
+    if (adminPassword.trim().toLowerCase() === "orenda2026") {
+      setIsAuthorized(true);
+      setAuthError("");
+    } else {
+      setAuthError("Assinatura técnica inválida ou Código de Acesso Incorreto.");
+    }
+  };
+
   const selectedLaudo = laudos.find(l => l.id === selectedLaudoId) || laudos[0];
 
   const handleDrag = (e: React.DragEvent) => {
@@ -451,13 +467,60 @@ export default function LaudosPortal() {
                     <Lock className="w-5 h-5 text-[#ff474e] shrink-0" />
                     <div>
                       <p className="text-xs font-mono font-extrabold text-white uppercase tracking-wider">Acesso Restrito ao Profissional</p>
-                      <p className="text-[11px] text-orenda-gray-medium">Este painel permite que Eduardo Donzelli (Eng. Químico) insira e registre novos laudos de pureza no sistema.</p>
+                      <p className="text-[11px] text-orenda-gray-medium">Este painel permite que Eduardo Donzelli (Engenheiro Químico) insira e registre novos laudos de pureza no sistema.</p>
                     </div>
                   </div>
                   <span className="text-[10px] font-mono text-[#ff474e] uppercase bg-[#ff474e]/15 px-2.5 py-1 rounded font-bold shrink-0">ADMIN</span>
                 </div>
 
-                {isUploading ? (
+                {!isAuthorized ? (
+                  <div className="py-8 text-center max-w-md mx-auto space-y-6">
+                    <div className="w-12 h-12 rounded-full bg-[#ff474e]/10 flex items-center justify-center text-[#ff474e] mx-auto border border-[#ff474e]/20">
+                      <Lock className="w-5 h-5 text-orenda-red animate-pulse" />
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="font-display font-black text-white text-lg">Assinatura Digital Requerida</h4>
+                      <p className="text-xs text-orenda-gray-medium leading-relaxed">
+                        Este painel é protegido por criptografia de controle. Para simular a postagem de novos laudos, valide seu registro com o seu código profissional.
+                      </p>
+                      <p className="text-[10px] text-orenda-red font-mono font-bold">
+                        CÓDIGO DE ACESSO EXCLUSIVO: orenda2026
+                      </p>
+                    </div>
+                    
+                    <form onSubmit={handleAuthSubmit} className="space-y-4">
+                      <div>
+                        <input 
+                          type="password"
+                          required
+                          placeholder="Senha de Acesso Técnico"
+                          value={adminPassword}
+                          onChange={(e) => setAdminPassword(e.target.value)}
+                          className="w-full text-center bg-[#0c0c0f] border border-white/10 rounded-xl px-4 py-3 font-mono text-xs text-white focus:border-orenda-red focus:outline-none"
+                        />
+                        {authError && (
+                          <p className="text-[11px] text-[#ff474e] font-mono mt-2 font-bold">{authError}</p>
+                        )}
+                      </div>
+                      
+                      <div className="flex gap-3">
+                        <button 
+                          type="button"
+                          onClick={() => setActiveTab("client")}
+                          className="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-white py-3 rounded-xl font-mono text-xs uppercase tracking-widest font-bold transition-all cursor-pointer"
+                        >
+                          Voltar
+                        </button>
+                        <button 
+                          type="submit"
+                          className="flex-1 bg-[#ff474e] hover:bg-red-600 text-white py-3 rounded-xl font-mono text-xs uppercase tracking-widest font-black transition-all cursor-pointer"
+                        >
+                          Desbloquear
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                ) : isUploading ? (
                   <div className="py-12 flex flex-col items-center text-center space-y-6">
                     <div className="relative">
                       <div className="w-16 h-16 rounded-full border-4 border-white/10 border-t-orenda-red animate-spin"></div>

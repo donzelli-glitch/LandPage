@@ -37,37 +37,10 @@ interface Laudo {
 export default function LaudosPortal() {
   const [activeTab, setActiveTab] = useState<"client" | "admin">("client");
   
-  // Hardcoded real/premium default reports
-  const [laudos, setLaudos] = useState<Laudo[]>([
-    {
-      id: "lote-04",
-      lote: "LOTE: OR-2404/A",
-      dataAnalise: "22 de Maio de 2026",
-      pureza: "99.87%",
-      maltodextrina: "0.00% (ZERO)",
-      metaisPesados: "CONFORME (INDETECTÁVEL)",
-      microbiologico: "CONFORME (LIVRE DE PATÓGENOS)",
-      certificador: "Eduardo Donzelli",
-      registroProfissional: "CRQ IV 04268153",
-      certificadoUri: "laudo_creatina_orenda_04.pdf",
-      notas: "A análise por cromatografia líquida de alta eficiência (HPLC) confirmou pureza estrutural livre de amido, maltodextrina e contaminantes."
-    },
-    {
-      id: "lote-03",
-      lote: "LOTE: OR-2403/B",
-      dataAnalise: "10 de Abril de 2026",
-      pureza: "99.82%",
-      maltodextrina: "0.00% (ZERO)",
-      metaisPesados: "CONFORME (INDETECTÁVEL)",
-      microbiologico: "CONFORME (LIVRE DE PATÓGENOS)",
-      certificador: "Eduardo Donzelli",
-      registroProfissional: "CRQ IV 04268153",
-      certificadoUri: "laudo_creatina_orenda_03.pdf",
-      notas: "Lote aprovado para atletas de elite. Parâmetros microbiológicos e físico-químicos rigorosamente alinhados com a RDC da ANVISA."
-    }
-  ]);
+  // Clean initialization so that you can upload your real ones
+  const [laudos, setLaudos] = useState<Laudo[]>([]);
 
-  const [selectedLaudoId, setSelectedLaudoId] = useState<string>("lote-04");
+  const [selectedLaudoId, setSelectedLaudoId] = useState<string>("");
 
   // Admin form state
   const [dragActive, setDragActive] = useState<boolean>(false);
@@ -293,168 +266,194 @@ export default function LaudosPortal() {
         )}
 
         {/* Tab Contents */}
-        <div id="purity-portal-container">
+        <div id="purity-portal-container" className="font-sans">
           {activeTab === "client" ? (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-              
-              {/* Lotes List Sidebar */}
-              <div className="lg:col-span-4 space-y-3">
-                <p className="text-xs font-mono text-orenda-gray-medium uppercase tracking-widest pl-2 mb-2 block">Selecione o Lote do Produto</p>
-                <div className="space-y-2">
-                  {laudos.map((l) => (
-                    <button
-                      key={l.id}
-                      onClick={() => setSelectedLaudoId(l.id)}
-                      className={`w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between group ${
-                        selectedLaudoId === l.id 
-                          ? "bg-gradient-to-r from-orenda-red/10 to-[#ff474e]/5 border-orenda-red/50 text-white" 
-                          : "bg-[#141417]/80 border-white/5 text-orenda-gray-medium hover:border-white/10 hover:text-white"
-                      }`}
-                    >
-                      <div className="space-y-1">
-                        <span className="font-mono text-xs font-bold text-white uppercase tracking-wider block">{l.lote}</span>
-                        <span className="text-[10px] text-orenda-gray-medium block">Análise: {l.dataAnalise}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-sm font-extrabold text-[#ff474e]">{l.pureza}</span>
-                        <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${selectedLaudoId === l.id ? "-rotate-90 text-orenda-red" : "text-white/20 group-hover:text-white/40"}`} />
-                      </div>
-                    </button>
-                  ))}
+            laudos.length === 0 ? (
+              <div className="bg-[#141418] border border-white/10 rounded-2xl p-8 sm:p-12 text-center max-w-2xl mx-auto space-y-6" id="empty-laudos-container">
+                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-orenda-gray-medium mx-auto border border-white/10">
+                  <FileText className="w-8 h-8 text-[#ff474e] animate-pulse" />
                 </div>
-
-                <div className="p-4 bg-gradient-to-b from-[#18181b] to-[#121215] border border-white/5 rounded-xl space-y-3">
-                  <div className="flex items-center gap-2">
-                    <Fingerprint className="w-4 h-4 text-orenda-red shrink-0" />
-                    <span className="font-mono text-[10px] text-white uppercase font-bold tracking-wider">Assinatura Digital de Pureza</span>
-                  </div>
-                  <p className="text-[11px] text-orenda-gray-medium leading-relaxed">
-                    Cada lote de creatina sai de nossa expedição atrelado ao laudo individual analítico verificado, assinado pelo responsável técnico e disponibilizado para consulta de atletas e biomédicos.
+                <div className="space-y-2">
+                  <h3 className="font-display font-black text-white text-xl">Aguardando Lotes Oficiais</h3>
+                  <p className="text-sm text-orenda-gray-medium leading-relaxed">
+                    Nenhum certificado químico de lote está cadastrado eletronicamente no momento. 
+                    Novos lotes estão sob análise de pureza molecular em nosso laboratório técnico.
+                  </p>
+                  <p className="text-xs text-[#ff474e] font-mono leading-relaxed max-w-md mx-auto pt-2">
+                    Eduardo, utilize a aba superior <strong className="underline">"Anexar Novo Laudo"</strong> para registrar as especificações de seu lote real e publicá-lo para os clientes! Siga os passos e insira o código técnico para liberar o upload.
                   </p>
                 </div>
+                
+                <button
+                  onClick={() => setActiveTab("admin")}
+                  className="bg-orenda-red hover:bg-orenda-red-hover text-white px-6 py-3.5 rounded-xl font-mono text-xs uppercase tracking-widest font-black transition-all cursor-pointer inline-flex items-center gap-2"
+                >
+                  <UploadCloud className="w-4 h-4 text-white" />
+                  <span>Cadastrar Primeiro Laudo</span>
+                </button>
               </div>
-
-              {/* Selected Laudo Analysis Sheet */}
-              <div className="lg:col-span-8">
-                <div className="bg-[#141418] border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col justify-between h-full relative overflow-hidden">
-                  
-                  {/* Decorative background watermark */}
-                  <div className="absolute top-0 right-0 p-8 opacity-5 text-white pointer-events-none">
-                    <Shield className="w-64 h-64" />
-                  </div>
-
-                  <div>
-                    {/* Header Sheet Info */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-white/10 gap-4 mb-6">
-                      <div className="space-y-1">
-                        <span className="bg-orenda-red/10 text-[#ff474e] font-mono text-[10px] uppercase font-bold px-2 py-1 rounded block w-max">
-                          LAUDO FISICO-QUÍMICO HOMOLOGADO
-                        </span>
-                        <h3 className="font-display text-2xl font-black text-white">{selectedLaudo.lote}</h3>
-                        <p className="text-xs text-orenda-gray-medium">Data de Emissão do Certificado: {selectedLaudo.dataAnalise}</p>
-                      </div>
-                      
+            ) : selectedLaudo ? (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                {/* Lotes List Sidebar */}
+                <div className="lg:col-span-4 space-y-3">
+                  <p className="text-xs font-mono text-orenda-gray-medium uppercase tracking-widest pl-2 mb-2 block">Selecione o Lote do Produto</p>
+                  <div className="space-y-2">
+                    {laudos.map((l) => (
                       <button
-                        onClick={() => handleDownload(selectedLaudo)}
-                        disabled={downloadingId === selectedLaudo.id}
-                        className="bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/25 text-white px-5 py-3 rounded-xl font-mono text-xs uppercase tracking-widest font-black flex items-center justify-center gap-2 transition-all self-start sm:self-center shrink-0 disabled:opacity-50"
+                        key={l.id}
+                        onClick={() => setSelectedLaudoId(l.id)}
+                        className={`w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between group ${
+                          selectedLaudoId === l.id 
+                            ? "bg-gradient-to-r from-orenda-red/10 to-[#ff474e]/5 border-orenda-red/50 text-white" 
+                            : "bg-[#141417]/80 border-white/5 text-orenda-gray-medium hover:border-white/10 hover:text-white"
+                        }`}
                       >
-                        <Download className={`w-3.5 h-3.5 text-orenda-red ${downloadingId === selectedLaudo.id ? "animate-bounce" : ""}`} />
-                        <span>{downloadingId === selectedLaudo.id ? "Baixando..." : "Baixar Laudo Técnico"}</span>
+                        <div className="space-y-1">
+                          <span className="font-mono text-xs font-bold text-white uppercase tracking-wider block">{l.lote}</span>
+                          <span className="text-[10px] text-orenda-gray-medium block">Análise: {l.dataAnalise}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-sm font-extrabold text-[#ff474e]">{l.pureza}</span>
+                          <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${selectedLaudoId === l.id ? "-rotate-90 text-orenda-red" : "text-white/20 group-hover:text-white/40"}`} />
+                        </div>
                       </button>
-                    </div>
-
-                    {/* Critical Chemical Constants Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                      
-                      {/* Constant 1: Pureza */}
-                      <div className="bg-black/30 border border-white/5 rounded-xl p-4 flex items-center gap-3 hover:border-orenda-red/20 transition-all">
-                        <div className="w-10 h-10 rounded-lg bg-orenda-red/10 flex items-center justify-center text-orenda-red font-mono shrink-0">
-                          <Zap className="w-5 h-5 col-span-2 text-orenda-red" />
-                        </div>
-                        <div>
-                          <span className="text-[10px] text-orenda-gray-medium uppercase block font-mono">Teor de Pureza</span>
-                          <span className="text-lg font-mono font-extrabold text-white">{selectedLaudo.pureza}</span>
-                          <span className="text-[10px] text-emerald-400 block font-semibold">Excede padrão de mercado</span>
-                        </div>
-                      </div>
-
-                      {/* Constant 2: Maltodextrina */}
-                      <div className="bg-black/30 border border-white/5 rounded-xl p-4 flex items-center gap-3 hover:border-orenda-red/20 transition-all">
-                        <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white font-mono shrink-0">
-                          <Check className="w-5 h-5 text-[#ff474e]" />
-                        </div>
-                        <div>
-                          <span className="text-[10px] text-orenda-gray-medium uppercase block font-mono">Aditivos, Amido e Malto</span>
-                          <span className="text-lg font-mono font-extrabold text-white">{selectedLaudo.maltodextrina}</span>
-                          <span className="text-[10px] text-[#ff474e] block font-semibold">Zero contaminantes de volume</span>
-                        </div>
-                      </div>
-
-                      {/* Constant 3: Heavy metals */}
-                      <div className="bg-black/30 border border-white/5 rounded-xl p-4 flex items-center gap-3 hover:border-orenda-red/20 transition-all">
-                        <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white shrink-0">
-                          <Scale className="w-5 h-5 text-orenda-gray-medium" />
-                        </div>
-                        <div>
-                          <span className="text-[10px] text-orenda-gray-medium uppercase block font-mono">Metais Pesados</span>
-                          <span className="text-sm font-mono font-bold text-white uppercase">{selectedLaudo.metaisPesados}</span>
-                          <span className="text-[9px] text-[#ff474e] block font-mono block">Rigidez absoluta</span>
-                        </div>
-                      </div>
-
-                      {/* Constant 4: Microbiologico */}
-                      <div className="bg-black/30 border border-white/5 rounded-xl p-4 flex items-center gap-3 hover:border-orenda-red/20 transition-all">
-                        <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white shrink-0">
-                          <Award className="w-5 h-5 text-orenda-gray-medium" />
-                        </div>
-                        <div>
-                          <span className="text-[10px] text-orenda-gray-medium uppercase block font-mono">Controle Microbiológico</span>
-                          <span className="text-sm font-mono font-bold text-white uppercase">{selectedLaudo.microbiologico}</span>
-                          <span className="text-[9px] text-emerald-400 block font-mono">Qualidade biológica total</span>
-                        </div>
-                      </div>
-
-                    </div>
-
-                    {/* Report Notes */}
-                    <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 text-xs text-orenda-gray-medium leading-relaxed mb-6">
-                      <p className="font-bold text-white mb-1">Notas da Engenharia:</p>
-                      {selectedLaudo.notas}
-                    </div>
+                    ))}
                   </div>
 
-                  {/* Certification Signature Section */}
-                  <div className="pt-4 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="bg-[#1c1c22] border border-white/10 w-12 h-12 rounded-full overflow-hidden flex items-center justify-center shrink-0">
-                        <img 
-                          src={eduardoDonzelli} 
-                          alt="Eduardo Donzelli" 
-                          className="w-full h-full object-cover scale-105"
-                          referrerPolicy="no-referrer"
-                        />
-                      </div>
-                      <div>
-                        <span className="text-[9px] font-mono text-orenda-gray-medium uppercase block">Auditor Químico Responsável</span>
-                        <p className="text-xs font-bold text-white block leading-tight">{selectedLaudo.certificador}</p>
-                        <p className="text-[10px] text-[#ff474e] font-mono leading-none block mt-0.5">{selectedLaudo.registroProfissional}</p>
-                      </div>
+                  <div className="p-4 bg-gradient-to-b from-[#18181b] to-[#121215] border border-white/5 rounded-xl space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Fingerprint className="w-4 h-4 text-orenda-red shrink-0" />
+                      <span className="font-mono text-[10px] text-white uppercase font-bold tracking-wider">Assinatura Digital de Pureza</span>
                     </div>
-
-                    <div className="border border-white/10 border-dashed rounded-xl px-4 py-3 bg-[#111114] flex items-center gap-2 self-start sm:self-center">
-                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                      <div className="text-left">
-                        <span className="font-mono text-[9px] uppercase text-emerald-400 font-extrabold block">LAUDO AUTENTICADO</span>
-                        <span className="font-mono text-[8px] text-orenda-gray-medium font-bold uppercase block">CERTIFICADO ATIVO E CONFORME</span>
-                      </div>
-                    </div>
+                    <p className="text-[11px] text-orenda-gray-medium leading-relaxed">
+                      Cada lote de creatina sai de nossa expedição atrelado ao laudo individual analítico verificado, assinado pelo responsável técnico e disponibilizado para consulta de atletas e biomédicos.
+                    </p>
                   </div>
-
                 </div>
-              </div>
 
-            </div>
+                {/* Selected Laudo Analysis Sheet */}
+                <div className="lg:col-span-8">
+                  <div className="bg-[#141418] border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col justify-between h-full relative overflow-hidden">
+                    
+                    {/* Decorative background watermark */}
+                    <div className="absolute top-0 right-0 p-8 opacity-5 text-white pointer-events-none">
+                      <Shield className="w-64 h-64" />
+                    </div>
+
+                    <div>
+                      {/* Header Sheet Info */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-white/10 gap-4 mb-6">
+                        <div className="space-y-1">
+                          <span className="bg-orenda-red/10 text-[#ff474e] font-mono text-[10px] uppercase font-bold px-2 py-1 rounded block w-max">
+                            LAUDO FISICO-QUÍMICO HOMOLOGADO
+                          </span>
+                          <h3 className="font-display text-2xl font-black text-white">{selectedLaudo.lote}</h3>
+                          <p className="text-xs text-orenda-gray-medium">Data de Emissão do Certificado: {selectedLaudo.dataAnalise}</p>
+                        </div>
+                        
+                        <button
+                          onClick={() => handleDownload(selectedLaudo)}
+                          disabled={downloadingId === selectedLaudo.id}
+                          className="bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/25 text-white px-5 py-3 rounded-xl font-mono text-xs uppercase tracking-widest font-black flex items-center justify-center gap-2 transition-all self-start sm:self-center shrink-0 disabled:opacity-50"
+                        >
+                          <Download className={`w-3.5 h-3.5 text-orenda-red ${downloadingId === selectedLaudo.id ? "animate-bounce" : ""}`} />
+                          <span>{downloadingId === selectedLaudo.id ? "Baixando..." : "Baixar Laudo Técnico"}</span>
+                        </button>
+                      </div>
+
+                      {/* Critical Chemical Constants Grid */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        
+                        {/* Constant 1: Pureza */}
+                        <div className="bg-black/30 border border-white/5 rounded-xl p-4 flex items-center gap-3 hover:border-orenda-red/20 transition-all">
+                          <div className="w-10 h-10 rounded-lg bg-orenda-red/10 flex items-center justify-center text-orenda-red font-mono shrink-0">
+                            <Zap className="w-5 h-5 col-span-2 text-orenda-red" />
+                          </div>
+                          <div>
+                            <span className="text-[10px] text-orenda-gray-medium uppercase block font-mono">Teor de Pureza</span>
+                            <span className="text-lg font-mono font-extrabold text-white">{selectedLaudo.pureza}</span>
+                            <span className="text-[10px] text-emerald-400 block font-semibold">Excede padrão de mercado</span>
+                          </div>
+                        </div>
+
+                        {/* Constant 2: Maltodextrina */}
+                        <div className="bg-black/30 border border-white/5 rounded-xl p-4 flex items-center gap-3 hover:border-orenda-red/20 transition-all">
+                          <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white font-mono shrink-0">
+                            <Check className="w-5 h-5 text-[#ff474e]" />
+                          </div>
+                          <div>
+                            <span className="text-[10px] text-orenda-gray-medium uppercase block font-mono">Aditivos, Amido e Malto</span>
+                            <span className="text-lg font-mono font-extrabold text-white">{selectedLaudo.maltodextrina}</span>
+                            <span className="text-[10px] text-[#ff474e] block font-semibold">Zero contaminantes de volume</span>
+                          </div>
+                        </div>
+
+                        {/* Constant 3: Heavy metals */}
+                        <div className="bg-black/30 border border-white/5 rounded-xl p-4 flex items-center gap-3 hover:border-orenda-red/20 transition-all">
+                          <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white shrink-0">
+                            <Scale className="w-5 h-5 text-orenda-gray-medium" />
+                          </div>
+                          <div>
+                            <span className="text-[10px] text-orenda-gray-medium uppercase block font-mono">Metais Pesados</span>
+                            <span className="text-sm font-mono font-bold text-white uppercase">{selectedLaudo.metaisPesados}</span>
+                            <span className="text-[9px] text-[#ff474e] block font-mono">Rigidez absoluta</span>
+                          </div>
+                        </div>
+
+                        {/* Constant 4: Microbiologico */}
+                        <div className="bg-black/30 border border-white/5 rounded-xl p-4 flex items-center gap-3 hover:border-orenda-red/20 transition-all">
+                          <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white shrink-0">
+                            <Award className="w-5 h-5 text-orenda-gray-medium" />
+                          </div>
+                          <div>
+                            <span className="text-[10px] text-orenda-gray-medium uppercase block font-mono">Controle Microbiológico</span>
+                            <span className="text-sm font-mono font-bold text-white uppercase">{selectedLaudo.microbiologico}</span>
+                            <span className="text-[9px] text-emerald-400 block font-mono">Qualidade biológica total</span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      {/* Report Notes */}
+                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 text-xs text-orenda-gray-medium leading-relaxed mb-6">
+                        <p className="font-bold text-white mb-1">Notas da Engenharia:</p>
+                        {selectedLaudo.notas}
+                      </div>
+                    </div>
+
+                    {/* Certification Signature Section */}
+                    <div className="pt-4 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className="bg-[#1c1c22] border border-white/10 w-12 h-12 rounded-full overflow-hidden flex items-center justify-center shrink-0">
+                          <img 
+                            src={eduardoDonzelli} 
+                            alt="Eduardo Donzelli" 
+                            className="w-full h-full object-cover scale-105"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div>
+                          <span className="text-[9px] font-mono text-orenda-gray-medium uppercase block">Auditor Químico Responsável</span>
+                          <p className="text-xs font-bold text-white block leading-tight">{selectedLaudo.certificador}</p>
+                          <p className="text-[10px] text-[#ff474e] font-mono leading-none block mt-0.5">{selectedLaudo.registroProfissional}</p>
+                        </div>
+                      </div>
+
+                      <div className="border border-white/10 border-dashed rounded-xl px-4 py-3 bg-[#111114] flex items-center gap-2 self-start sm:self-center">
+                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                        <div className="text-left">
+                          <span className="font-mono text-[9px] uppercase text-emerald-400 font-extrabold block">LAUDO AUTENTICADO</span>
+                          <span className="font-mono text-[8px] text-orenda-gray-medium font-bold uppercase block">CERTIFICADO ATIVO E CONFORME</span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            ) : null
           ) : (
             <div className="max-w-3xl mx-auto">
               
